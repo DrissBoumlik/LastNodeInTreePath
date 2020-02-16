@@ -13,15 +13,16 @@ function lastNode(startNode, fromIds, toIds) {
         if (!paths.length) {
             paths.push(fromId + '' + toId);
         } else {
-            if (paths.includes(toId)) {
-                paths.push(fromId + '' + toId);
-            }
-            if (paths.includes(fromId)) {
+            console.log(fromId, toId);
+            // if toId is at the start  => add fromId before
+            // else                     => push new record to paths
 
-            }
+            // if fromId is at the end  => add toId after
+            // els                      => push new record to paths
         }
 
     });
+    console.log(paths);
     return node;
 }
 
