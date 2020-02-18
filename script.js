@@ -1,5 +1,5 @@
 let _startNode = 6,
-    _fromIds = [6, 5, 1, 4, 8, 9, 2, 7, 3],
+    _fromIds = [6, 5, 1, 0, 8, 9, 2, 9, 3],
     _toIds = [0, 9, 3, 7, 5, 4, 3, 6, 5];
 
 function lastNode(startNode, fromIds, toIds) {
@@ -25,32 +25,33 @@ function lastNode(startNode, fromIds, toIds) {
             if (pushNew) {
                 paths.push(fromId + '' + toId);
             }
-            // if toId is at the start  => add fromId before
-            // else                     => push new record to paths
-
-            // if fromId is at the end  => add toId after
-            // else                     => push new record to paths
         }
 
     });
     console.log(paths);
     let lastElement;
     let _lastNode = paths.filter(function (path, index) {
-        lastElement = path[path.length - 1];
-        let isLastNode = paths.filter(function (path2, index2) {
-            if (index !== index2) {
-                if (path2.lastIndexOf(lastElement) !== -1 &&
-                    lastElement !== path2[path2.length - 1]) {
-                    return path;
+            lastElement = path[path.length - 1];
+            let isLastNode = paths.filter(function (path2, index2) {
+                // if(path === '9607' && path2 === '07') debugger
+                if (index2 < index) {
+                    return (path2.lastIndexOf(lastElement) !== -1 &&
+                        lastElement !== path2[path2.length - 1]) ||
+                        (path.indexOf(path2) !== -1 || path2.indexOf(path) !== -1);
                 }
+            });
+            if (!isLastNode.length) {
+                return path;
             }
-        });
-        if (!isLastNode.length) {
-            return path;
         }
+        )
+    ;
+    console.log(_lastNode);
+    // TODO => test common index on all result strings then see the farthest one from the end node
+    lastElement = _lastNode.map(function (path, index) {
+        return path[path.length - 1];
     });
-    let first = _lastNode.pop();
-    lastElement = first[first.length - 1];
+    lastElement =  Array.from(new Set(lastElement));
     return lastElement;
 }
 
