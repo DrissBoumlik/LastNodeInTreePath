@@ -1,8 +1,7 @@
-let _startNode = 6,
-    _fromIds = [6, 5, 1, 0, 8, 9, 2, 9, 3],
+let _fromIds = [6, 5, 1, 0, 8, 9, 2, 9, 3],
     _toIds = [0, 9, 3, 7, 5, 4, 3, 6, 5];
 
-function lastNode(startNode, fromIds, toIds) {
+function lastNodes(fromIds, toIds) {
     let paths = [];
 
     fromIds.forEach(function (fromId, index) {
@@ -44,17 +43,16 @@ function lastNode(startNode, fromIds, toIds) {
                 return path;
             }
         }
-        )
-    ;
+    );
     console.log(_lastNode);
     // TODO => test common index on all result strings then see the farthest one from the end node
     lastElement = _lastNode.map(function (path, index) {
         return path[path.length - 1];
     });
-    lastElement =  Array.from(new Set(lastElement));
+    lastElement = Array.from(new Set(lastElement));
     return lastElement;
 }
 
 
-let result = lastNode(_startNode, _fromIds, _toIds);
+let result = lastNodes(_fromIds, _toIds);
 console.log(result);
