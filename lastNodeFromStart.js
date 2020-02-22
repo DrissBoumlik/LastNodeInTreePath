@@ -1,6 +1,6 @@
-let _startNode = 6,
-    _fromIds = [11, 6, 5, 2, 1, 3, 1, 10, 0, 2, 3, 1],
-    _toIds = [12, 9, 7, 8, 10, 5, 3, 11, 1, 6, 4, 2];
+let _startNode = 1,
+    _fromIds = [11, 6, 5, 15, 2, 1, 3, 1, 7, 2, 14, 10, 16, 0, 2, 3, 1],
+    _toIds = [12, 9, 7, 16, 8, 10, 5, 3, 13, 14, 15, 11, 17, 1, 6, 4, 2];
 
 function getLastNodes(node, fromIds, toIds) {
     let result = [];
@@ -24,11 +24,11 @@ function lastNodes(startNode, fromIds, toIds) {
     let results = getLastNodes(startNode, fromIds, toIds);
 
     let arrayExists = undefined;
-    let copyResults = undefined;
+    let _lastNodes = undefined;
     do {
         arrayExists = true;
-        copyResults = results.flat();
-        results = copyResults.filter(function (element) {
+        _lastNodes = results.flat();
+        results = _lastNodes.filter(function (element) {
             return Array.isArray(element);
         });
         if (!results.length) {
@@ -36,9 +36,9 @@ function lastNodes(startNode, fromIds, toIds) {
         }
 
     } while (arrayExists);
-    return copyResults;
+    return _lastNodes;
 }
 
 
-let results = lastNodes(_startNode, _fromIds, _toIds);
-console.log(results);
+let lastNodesResult = lastNodes(_startNode, _fromIds, _toIds);
+console.log(lastNodesResult);
