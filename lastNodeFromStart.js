@@ -1,9 +1,22 @@
 let _startNode = 1,
-    _fromIds = [11, 6, 5, 15, 2, 1, 3, 1, 7, 2, 14, 10, 16, 0, 2, 3, 1],
-    _toIds = [12, 9, 7, 16, 8, 10, 5, 3, 13, 14, 15, 11, 17, 1, 6, 4, 2];
+    _fromIds = [11, 6, 5, 15, 2, 1, 3, 1, 7, 2, 14, 10, 16, 0, 2, 3, 1, 18, 13],
+    _toIds = [12, 9, 7, 16, 8, 10, 5, 3, 13, 14, 15, 11, 17, 1, 6, 4, 2, 3, 18];
+let _passedNodes = [];
+
+let lastNodesResult = lastNodes(_startNode, _fromIds, _toIds);
+setTimeout(() => {
+    console.clear(); // clearing all browser extension warning/errors messages
+    console.log(lastNodesResult);
+}, 500);
+
 
 function getLastNodes(node, fromIds, toIds) {
     let result = [];
+    if (_passedNodes.includes(node)) {
+        result.push(node);
+        return result;
+    }
+    _passedNodes.push(node);
     fromIds.forEach(function (fromId, index) {
         if (node === fromId) {
             // let object = {};
@@ -38,7 +51,3 @@ function lastNodes(startNode, fromIds, toIds) {
     } while (arrayExists);
     return _lastNodes;
 }
-
-
-let lastNodesResult = lastNodes(_startNode, _fromIds, _toIds);
-console.log(lastNodesResult);
